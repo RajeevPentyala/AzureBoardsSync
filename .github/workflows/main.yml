@@ -17,6 +17,8 @@ jobs:
           ado_token: "${{ secrets.ADO_PERSONAL_ACCESS_TOKEN }}"
           github_token: "${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}"
           ado_organization: "rajeevpentyala0155"
+          ado_area_path: "GitHubSync\\COE-Kit\\Develop"
+          ado_iteration_path: "GitHubSync\\October Release"
           ado_project: "GitHubSync"          
           ado_wit: "Issue"
           ado_new_state: "To Do"
