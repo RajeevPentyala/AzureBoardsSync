@@ -9,7 +9,26 @@ on:
 
 jobs:
   alert:
-    if: ${{ !github.event.issue.pull_request }}
+    if: ${{ !github.event.issue.pull_request && github.event_name == 'issues' && github.event.issue.labels == *'Feature'* }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: danhellem/github-actions-issue-to-work-item@master
+        env:
+          ado_token: "${{ secrets.ADO_PERSONAL_ACCESS_TOKEN }}"
+          github_token: "${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}"
+          ado_organization: "rajeevpentyala0155"
+          ado_project: "GitHubSync"
+          ado_area_path: "GitHubSync\\COE-Kit\\Develop"
+          ado_iteration_path: "GitHubSync\\October Release"                    
+          ado_wit: "Epic"
+          ado_new_state: "To Do"
+          ado_active_state: "Doing"
+          ado_close_state: "Done"
+          ado_bypassrules: true
+          log_level: 100
+
+  alert2:
+    if: ${{ !github.event.issue.pull_request && github.event_name == 'issues' && github.event.issue.labels != *'Feature'* }}
     runs-on: ubuntu-latest
     steps:
       - uses: danhellem/github-actions-issue-to-work-item@master
