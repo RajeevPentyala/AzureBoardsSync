@@ -9,7 +9,7 @@ on:
 
 jobs:
   alert:
-    if: ${{ !github.event.issue.pull_request && github.event_name == 'issues' && contains(github.event.issue.labels, 'enhancement') }}
+    if: ${{ !github.event.issue.pull_request && ${{ github.event.label.name == 'bug' }} }}
     runs-on: ubuntu-latest
     steps:
       - uses: danhellem/github-actions-issue-to-work-item@master
@@ -28,7 +28,7 @@ jobs:
           log_level: 100
 
   alert2:
-    if: ${{ !github.event.issue.pull_request && github.event_name == 'issues' && contains(github.event.issue.labels, 'bug') }}
+    if: ${{ !github.event.issue.pull_request && ${{ github.event.label.name == 'enhancement' }} }}
     runs-on: ubuntu-latest
     steps:
       - uses: danhellem/github-actions-issue-to-work-item@master
