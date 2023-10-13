@@ -11,8 +11,10 @@ concurrency:
   cancel-in-progress: false    
 
 jobs:
-  alertEnhancement:
-    if: contains(github.event.issue.labels.*.name, 'enhancement')
+  alertEnhancementCOE:
+    if: |
+      contains(github.event.issue.labels.*.name, 'enhancement') &&
+      contains(github.event.issue.labels.*.name, 'coe-starter-kit')
     runs-on: ubuntu-latest
     steps:
       - uses: danhellem/github-actions-issue-to-work-item@master
@@ -30,8 +32,10 @@ jobs:
           ado_bypassrules: true
           log_level: 100
           
-  alertIssue:
-    if: contains(github.event.issue.labels.*.name, 'bug')
+  alertIssueCOE:
+    if: |
+      contains(github.event.issue.labels.*.name, 'bug') &&
+      contains(github.event.issue.labels.*.name, 'coe-starter-kit')
     runs-on: ubuntu-latest
     steps:
       - uses: danhellem/github-actions-issue-to-work-item@master
