@@ -11,17 +11,8 @@ concurrency:
   cancel-in-progress: false    
 
 jobs:
-  print-labels:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print Labels
-        run: |
-          echo "Issue Labels:"
-          for label in "${{ github.event.issue.labels }}"; do
-            echo "- ${{ label.name }}"
-          done
   alertEnhancement:
-    if: ${{ !github.event.issue.pull_request && github.event.label.name == 'enhancement' }}
+    if: contains(github.event.issue.labels.*.name, 'enhancement')
     runs-on: ubuntu-latest
     steps:
       - uses: danhellem/github-actions-issue-to-work-item@master
