@@ -18,7 +18,7 @@ jobs:
         run: |
           echo "Issue Labels:"
           for label in "${{ github.event.issue.labels }}"; do
-            echo "- $label"
+            echo "- ${{ label.name }}"
           done
   alertEnhancement:
     if: ${{ !github.event.issue.pull_request && github.event.label.name == 'enhancement' }}
