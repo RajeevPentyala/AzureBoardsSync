@@ -23,8 +23,8 @@ jobs:
           github_token: "${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}"
           ado_organization: "rajeevpentyala0155"
           ado_project: "GitHubSync"
-          ado_area_path: "GitHubSync\\COE-Kit\\Develop"
-          ado_iteration_path: "GitHubSync\\October Release"  
+          ado_area_path: "GitHubSync\\COE Starter Kit\\Develop"
+          ado_iteration_path: "GitHubSync\\FY24\\Q2\\October"  
           ado_wit: "Epic"
           ado_new_state: "To Do"
           ado_active_state: "Doing"
@@ -45,11 +45,53 @@ jobs:
           ado_organization: "rajeevpentyala0155"
           ado_project: "GitHubSync"
           ado_area_path: "GitHubSync\\COE-Kit\\Develop"
-          ado_iteration_path: "GitHubSync\\October Release"  
+          ado_iteration_path: "GitHubSync\\FY24\\Q2\\October"  
           ado_wit: "Issue"
           ado_new_state: "To Do"
           ado_active_state: "Doing"
           ado_close_state: "Done"
           ado_bypassrules: true
           log_level: 100
+          
+  alertEnhancementALM:
+    if: |
+      contains(github.event.issue.labels.*.name, 'enhancement') &&
+      contains(github.event.issue.labels.*.name, 'alm-accelerator')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: danhellem/github-actions-issue-to-work-item@master
+        env:
+          ado_token: "${{ secrets.ADO_PERSONAL_ACCESS_TOKEN }}"
+          github_token: "${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}"
+          ado_organization: "rajeevpentyala0155"
+          ado_project: "GitHubSync"
+          ado_area_path: "GitHubSync\\ALMAccelerator\\Develop"
+          ado_iteration_path: "GitHubSync\\FY24\\Q2\\October"  
+          ado_wit: "Epic"
+          ado_new_state: "To Do"
+          ado_active_state: "Doing"
+          ado_close_state: "Done"
+          ado_bypassrules: true
+          log_level: 100
+          
+  alertIssueALM:
+    if: |
+      contains(github.event.issue.labels.*.name, 'bug') &&
+      contains(github.event.issue.labels.*.name, 'alm-accelerator')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: danhellem/github-actions-issue-to-work-item@master
+        env:
+          ado_token: "${{ secrets.ADO_PERSONAL_ACCESS_TOKEN }}"
+          github_token: "${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}"
+          ado_organization: "rajeevpentyala0155"
+          ado_project: "GitHubSync"
+          ado_area_path: "GitHubSync\\ALMAccelerator\\Develop"
+          ado_iteration_path: "GitHubSync\\FY24\\Q2\\October"  
+          ado_wit: "Issue"
+          ado_new_state: "To Do"
+          ado_active_state: "Doing"
+          ado_close_state: "Done"
+          ado_bypassrules: true
+          log_level: 100          
    
