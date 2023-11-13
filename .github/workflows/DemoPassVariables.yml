@@ -5,22 +5,26 @@ on:
     types:
       [opened, edited, deleted, closed, reopened, labeled, unlabeled, assigned, milestoned]
   issue_comment:
-    types: [created, edited, deleted]   
+    types: [created, edited, deleted]
+concurrency:
+  group: issue-${{ github.event.issue.number }}
+  cancel-in-progress: false    
 
 jobs:
-  Job1-SetVariable:
+  prepareIterationPathJob:
     runs-on: ubuntu-latest
     outputs:
       ITERATION: ${{ steps.set-variable.outputs.MYVARIABLE }}
     steps:        
-      - name: Set Variable
-        id: set-variable
-        run: echo "MYVARIABLE=Hello World" >> $GITHUB_OUTPUT   
+      - name: Set Iteration Path
+        id: set-iteration
+        run: |
+          echo "MYVARIABLE=Hello World" >> $GITHUB_OUTPUT   
 
   Job2-ReadVariable:    
-    needs: Job1-SetVariable
+    needs: prepareIterationPathJob
     runs-on: ubuntu-latest    
     steps:
       - name: Read Job1 Variable
         id: read-variable
-        run: echo "${{ needs.Job1-SetVariable.outputs.MYVARIABLE }}"                          
+        run: echo "${{ needs.prepareIterationPathJob.outputs.MYVARIABLE }}"                          
