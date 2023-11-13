@@ -1,0 +1,28 @@
+name: Demo pass variables between jobs
+
+on:
+  issues:
+    types:
+      [opened, edited, deleted, closed, reopened, labeled, unlabeled, assigned, milestoned]
+  issue_comment:
+    types: [created, edited, deleted]   
+
+jobs:
+  Job1-SetVariable:
+    runs-on: ubuntu-latest
+    outputs:
+      ITERATION: ${{ steps.set-variable.outputs.MYVARIABLE }}
+    steps:        
+      - name: Set Variable
+        id: set-variable
+        run: |
+            echo "MYVARIABLE=Hello World" >> $GITHUB_OUTPUT   
+
+  Job2-ReadVariable:    
+    needs: Job1-SetVariable
+    runs-on: ubuntu-latest    
+    steps:
+      - name: Read Job1 Variable
+        id: read-variable
+        run: |
+            echo "${{ needs.Job1-SetVariable.outputs.MYVARIABLE }}"                          
