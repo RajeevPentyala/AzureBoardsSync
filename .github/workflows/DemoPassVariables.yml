@@ -15,8 +15,7 @@ jobs:
     steps:        
       - name: Set Variable
         id: set-variable
-        run: |
-            echo "MYVARIABLE=Hello World" >> $GITHUB_OUTPUT   
+        run: echo "MYVARIABLE=Hello World" >> $GITHUB_OUTPUT   
 
   Job2-ReadVariable:    
     needs: Job1-SetVariable
@@ -24,5 +23,4 @@ jobs:
     steps:
       - name: Read Job1 Variable
         id: read-variable
-        run: |
-            echo "${{ needs.Job1-SetVariable.outputs.MYVARIABLE }}"                          
+        run: echo "${{ needs.Job1-SetVariable.outputs.MYVARIABLE }}"                          
